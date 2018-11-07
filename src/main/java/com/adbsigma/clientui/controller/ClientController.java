@@ -4,6 +4,7 @@ import com.adbsigma.clientui.beans.ProductBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.adbsigma.clientui.proxies.ProductsManagementProxy;
 
@@ -22,5 +23,12 @@ public class ClientController {
         model.addAttribute("products", products);
 
         return "Accueil";
+    }
+
+    @RequestMapping("/product/details/{id}")
+    public String productDetails(@PathVariable int id, Model model){
+        ProductBean product = ProductsProxy.displayProduct(id);
+        model.addAttribute("product", product);
+        return "ProductDetails";
     }
 }
